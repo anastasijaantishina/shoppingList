@@ -22,11 +22,18 @@ public class ProductRepository implements Repository<Product> {
     }
 
     public void changeProductName(Long id, String name) {
-        products.get(id).setName(name);
+        if (!products.containsKey(id)) {
+            System.out.println("ID not found!");
+        } else {
+            products.get(id).setName(name);
+        }
     }
 
     public void changeProductPrice(Long id, BigDecimal price) {
-        products.get(id).setPrice(price);
+        if (!products.containsKey(id)) {
+            System.out.println("ID not found!");
+        } else {
+            products.get(id).setPrice(price);
+        }
     }
-
 }
