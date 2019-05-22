@@ -7,11 +7,8 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
-    private ProductCategoryEnum category;
+    private ProductCategory category;
     private BigDecimal discount;
-
-    public Product() {
-    }
 
     public Long getId() {
         return id;
@@ -37,11 +34,11 @@ public class Product {
         this.price = price;
     }
 
-    public ProductCategoryEnum getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(ProductCategoryEnum category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
