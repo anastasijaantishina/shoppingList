@@ -6,17 +6,18 @@ public class ProductNameValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(Product product) {
-        nullNameValidation(product.getName());
+        checkNotNull(product);
         nameLengthValidation(product.getName());
-        beginningAndEndOfNameValidation(product.getName());
+        startsAndEndsWithValidation(product.getName());
         spacesCountValidation(product.getName());
         correctUseOfSpacesValidation(product.getName());
-        useOfInvalidCharactersValidation(product.getName());
+        invalidCharactersValidation(product.getName());
     }
 
-    private void nullNameValidation(String name) {
-        if (name.isEmpty()) {
-            throw new ProductValidationException("Error! There is no name.");
+    @Override
+    public void checkNotNull(Product product) {
+        if (product.getName() == null) {
+            throw new ProductValidationException("Product name must not be null");
         }
     }
 
@@ -29,7 +30,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         }
     }
 
-    private void beginningAndEndOfNameValidation(String name) {
+    private void startsAndEndsWithValidation(String name) {
         if (name.startsWith(" ")) {
             throw new ProductValidationException("Error! Name starts with a space.");
         }
@@ -65,7 +66,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         }
     }
 
-    private void useOfInvalidCharactersValidation(String name) {
+    private void invalidCharactersValidation(String name) {
         char[] charArray = name.toCharArray();
 
         for (char character : charArray) {
