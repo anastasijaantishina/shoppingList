@@ -17,19 +17,15 @@ public class ProductService {
         return createdProduct.getId();
     }
 
-    public Product findById(Long id) {
-        return repository.findById(id);
+    public void delete(Long id) {
+        repository.delete(id);
     }
 
-    public Product delete(Long id) {
-        return repository.delete(id);
+    public void changeProductName(Long id, String name) {
+       repository.changeProductName(id, name);
     }
 
-    public Product changeProductName(Long id, String name) {
-        return repository.changeProductName(id, name);
-    }
-
-    public Product changeProductPrice(Long id, BigDecimal price) {
-        return repository.changeProductPrice(id, price);
+    public void changeProductPrice(Long id, BigDecimal price) {
+        repository.changeProductPrice(id, price);
     }
 }

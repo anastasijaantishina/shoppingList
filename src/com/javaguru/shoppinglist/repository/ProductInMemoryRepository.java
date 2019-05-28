@@ -18,29 +18,27 @@ public class ProductInMemoryRepository {
         return product;
     }
 
-    public Product delete(Long id) {
-        return products.remove(id);
+    public void delete(Long id) {
+        if(!products.containsKey(id)) {
+            System.out.println("ID not found!");
+        } else {
+            products.remove(id);
+        }
     }
 
-    public Product changeProductName(Long id, String name) {
+    public void changeProductName(Long id, String name) {
         if (!products.containsKey(id)) {
             System.out.println("ID not found!");
         } else {
             products.get(id).setName(name);
         }
-        return products.get(id);
     }
 
-    public Product changeProductPrice(Long id, BigDecimal price) {
+    public void changeProductPrice(Long id, BigDecimal price) {
         if (!products.containsKey(id)) {
             System.out.println("ID not found!");
         } else {
             products.get(id).setPrice(price);
         }
-        return products.get(id);
-    }
-
-    public Product findById(Long id) {
-        return products.get(id);
     }
 }
