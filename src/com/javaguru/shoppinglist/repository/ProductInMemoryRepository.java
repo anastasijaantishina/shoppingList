@@ -19,7 +19,7 @@ public class ProductInMemoryRepository {
     }
 
     public void delete(Long id) {
-        if(!products.containsKey(id)) {
+        if (!products.containsKey(id)) {
             System.out.println("ID not found!");
         } else {
             products.remove(id);
@@ -39,6 +39,14 @@ public class ProductInMemoryRepository {
             System.out.println("ID not found!");
         } else {
             products.get(id).setPrice(price);
+        }
+    }
+
+    public boolean containsProductName(String name) {
+        if (products.containsValue(name)) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
