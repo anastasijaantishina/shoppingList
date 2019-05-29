@@ -1,8 +1,14 @@
 package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductNameValidationRule implements ProductValidationRule {
+
+    ProductInMemoryRepository repository = new ProductInMemoryRepository();
 
     @Override
     public void validate(Product product) {
@@ -12,6 +18,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         spacesCountValidation(product.getName());
         correctUseOfSpacesValidation(product.getName());
         invalidCharactersValidation(product.getName());
+        uniqueNameValidation(product.getName());
     }
 
     @Override
@@ -25,7 +32,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         if (name.length() < 3) {
             throw new ProductValidationException("Error! Name is too short.");
         }
-        if (name.length() > 30) {
+        if (name.length() > 25) {
             throw new ProductValidationException("Error! Name is too long.");
         }
     }
@@ -82,6 +89,12 @@ public class ProductNameValidationRule implements ProductValidationRule {
             if (character > 122) {
                 throw new ProductValidationException("Error! Name contains invalid characters");
             }
+        }
+    }
+
+    private void uniqueNameValidation(String name) {
+        if (repository.containsProductName(name) == false) {
+            throw new ProductValidationException("Error! Product name should be unique");
         }
     }
 }
