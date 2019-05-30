@@ -14,11 +14,4 @@ public class ProductPriceValidationRule implements ProductValidationRule {
             throw new ProductValidationException("Error! The price can not be less than " + MIN_PRICE + "Eur");
         }
     }
-
-    @Override
-    public void checkNotNull(Product product) {
-        if (product.getPrice() == null) {
-            throw new ProductValidationException("Product price must not be null");
-        }
-    }
 }
