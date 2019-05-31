@@ -12,7 +12,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(Product product) {
-        checkNotNull(product);
+        nullNameValidation(product.getName());
         nameLengthValidation(product.getName());
         startsAndEndsWithValidation(product.getName());
         spacesCountValidation(product.getName());
@@ -21,9 +21,8 @@ public class ProductNameValidationRule implements ProductValidationRule {
         uniqueNameValidation(product.getName());
     }
 
-    @Override
-    public void checkNotNull(Product product) {
-        if (product.getName() == null) {
+    private void nullNameValidation(String name) {
+        if (name == null) {
             throw new ProductValidationException("Product name must not be null");
         }
     }

@@ -10,6 +10,7 @@ public class ProductValidationService {
     private Set<ProductValidationRule> validationRules = new HashSet<>();
 
     public ProductValidationService() {
+        validationRules.add(new ProductNullValidationRule());
         validationRules.add(new ProductNameValidationRule());
         validationRules.add(new ProductPriceValidationRule());
         validationRules.add(new ProductDiscountValidationRule());

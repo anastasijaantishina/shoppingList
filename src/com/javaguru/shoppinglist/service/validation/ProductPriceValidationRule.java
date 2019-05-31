@@ -10,7 +10,18 @@ public class ProductPriceValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(Product product) {
-        if ((product.getPrice().compareTo(MIN_PRICE) < 0)) {
+        nullPriceValidation(product.getPrice());
+        minPriceValidation(product.getPrice());
+    }
+
+    private void nullPriceValidation(BigDecimal price) {
+        if (price == null) {
+            throw new ProductValidationException("Error! Product price must not be null");
+        }
+    }
+
+    private void minPriceValidation(BigDecimal price) {
+        if ((price.compareTo(MIN_PRICE) < 0)) {
             throw new ProductValidationException("Error! The price can not be less than " + MIN_PRICE + "Eur");
         }
     }

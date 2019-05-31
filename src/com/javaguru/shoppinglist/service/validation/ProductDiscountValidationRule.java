@@ -11,22 +11,21 @@ public class ProductDiscountValidationRule implements ProductValidationRule{
 
     @Override
     public void validate(Product product) {
-        checkNotNull(product);
-        discountAmountValidation(product);
+        checkNotNull(product.getDiscount());
+        discountAmountValidation(product.getDiscount());
     }
 
-    @Override
-    public void checkNotNull(Product product) {
-        if (product.getDiscount() == null) {
+    private void checkNotNull(BigDecimal discount) {
+        if (discount == null) {
             throw new ProductValidationException("Product discount must not be null");
         }
     }
 
-    private void discountAmountValidation(Product product) {
-        if (product.getDiscount().compareTo(MAX_DISCOUNT) > 0) {
+    private void discountAmountValidation(BigDecimal discount) {
+        if (discount.compareTo(MAX_DISCOUNT) > 0) {
             throw new ProductValidationException("Error! The discount can not be more than " + MAX_DISCOUNT + '%');
         }
-        if (product.getDiscount().compareTo(MIN_DISCOUNT) < 0) {
+        if (discount.compareTo(MIN_DISCOUNT) < 0) {
             throw new ProductValidationException("Error! The discount can not be negative");
         }
     }
