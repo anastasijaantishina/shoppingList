@@ -6,7 +6,7 @@ public class ProductNullValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(Product product) {
-
+        checkNotNull(product);
     }
 
     @Override
