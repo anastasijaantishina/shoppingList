@@ -2,7 +2,6 @@ package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-
 import java.util.LinkedList;
 import java.util.List;
 
