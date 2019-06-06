@@ -25,7 +25,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
     @Override
     public void checkNotNull(Product product) {
         if (product.getName() == null) {
-            throw new ProductValidationException("Product name must not be null");
+            throw new ProductValidationException("Product name must not be null!");
         }
     }
 
