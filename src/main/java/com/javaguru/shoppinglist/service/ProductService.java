@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class ProductService {
 
     ProductInMemoryRepository repository = new ProductInMemoryRepository();
-    ProductValidationService validationService = new ProductValidationService();
+    ProductValidationService validationService = new ProductValidationService(repository);
 
     public Long createProduct(Product product) {
         validationService.validate(product);

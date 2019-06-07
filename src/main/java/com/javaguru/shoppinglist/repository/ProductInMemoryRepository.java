@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.repository;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 public class ProductInMemoryRepository {
 
     private Map<Long, Product> products = new HashMap<>();
-    private Long productIdSequence = Long.valueOf(0);
+    private Long productIdSequence = 0L;
 
     public Product put(Product product) {
         products.put(productIdSequence, product);

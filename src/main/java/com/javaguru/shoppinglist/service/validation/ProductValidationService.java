@@ -1,16 +1,16 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.Product;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductValidationService {
 
-    private Set<ProductValidationRule> validationRules = new HashSet<>();
+    private List<ProductValidationRule> validationRules = new LinkedList<>();
 
-    public ProductValidationService() {
-        validationRules.add(new ProductNameValidationRule());
+    public ProductValidationService(ProductInMemoryRepository repository) {
+        validationRules.add(new ProductNameValidationRule(repository));
         validationRules.add(new ProductPriceValidationRule());
         validationRules.add(new ProductDiscountValidationRule());
     }

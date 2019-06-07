@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 
 import java.math.BigDecimal;
 
@@ -12,6 +12,13 @@ public class ProductPriceValidationRule implements ProductValidationRule {
     public void validate(Product product) {
         if ((product.getPrice().compareTo(MIN_PRICE) < 0)) {
             throw new ProductValidationException("Error! The price can not be less than " + MIN_PRICE + "Eur");
+        }
+    }
+
+    @Override
+    public void checkNotNull(Product product) {
+        if (product.getPrice() == null) {
+            throw new ProductValidationException("Product price must not be null!");
         }
     }
 }

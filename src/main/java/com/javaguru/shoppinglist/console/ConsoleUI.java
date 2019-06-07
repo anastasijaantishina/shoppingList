@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.service.enums.ProductCategory;
 import com.javaguru.shoppinglist.service.ProductService;
 
@@ -20,21 +20,21 @@ public class ConsoleUI {
                 System.out.println("3. Change product name");
                 System.out.println("4. Change product price");
                 System.out.println("5. Exit");
-                int userInput = scanner.nextInt();
+                String userInput = scanner.nextLine();
                 switch (userInput) {
-                    case 1:
+                    case "1":
                         createProduct();
                         break;
-                    case 2:
+                    case "2":
                         deleteProduct();
                         break;
-                    case 3:
+                    case "3":
                         changeProductName();
                         break;
-                    case 4:
+                    case "4":
                         changeProductPrice();
                         break;
-                    case 5:
+                    case "5":
                         return;
                 }
             } catch (Exception e) {
@@ -45,7 +45,6 @@ public class ConsoleUI {
     }
 
     private void createProduct() {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Product name: ");
         String name = scanner.nextLine();
@@ -60,12 +59,22 @@ public class ConsoleUI {
 
         ProductCategory category = null;
 
-        switch (scanner.nextInt()) {
-            case 1: category = ProductCategory.ALCOHOL;
-            case 2: category = ProductCategory.FRUITS;
-            case 3: category = ProductCategory.MEAT;
-            case 4: category = ProductCategory.DAIRY;
-            case 5: category = ProductCategory.VEGETABLES;
+        switch (scanner.nextLine()) {
+            case "1":
+                category = ProductCategory.ALCOHOL;
+                break;
+            case "2":
+                category = ProductCategory.FRUITS;
+                break;
+            case "3":
+                category = ProductCategory.MEAT;
+                break;
+            case "4":
+                category = ProductCategory.DAIRY;
+                break;
+            case "5":
+                category = ProductCategory.VEGETABLES;
+                break;
         }
 
         System.out.println("Enter Product discount: ");
@@ -78,8 +87,6 @@ public class ConsoleUI {
         product.setPrice(price);
         product.setCategory(category);
         product.setDiscount(discount);
-
-
         Long id = productService.createProduct(product);
         System.out.println("Result: " + id);
 
@@ -94,21 +101,23 @@ public class ConsoleUI {
         productService.delete(id);
     }
 
-    private void changeProductName(){
+    private void changeProductName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
-        Long id = scanner.nextLong();
+        Long id = Long.valueOf(scanner.nextLine());
         System.out.println("Enter product name: ");
-        String name = String.valueOf(scanner.nextLong());
+        String name = String.valueOf(scanner.nextLine());
         productService.changeProductName(id, name);
+        System.out.println("Name was changed! Actual name is: " + name);
     }
 
     private void changeProductPrice() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
-        Long id = scanner.nextLong();
+        Long id = Long.valueOf(scanner.nextLine());
         System.out.println("Enter product price: ");
         BigDecimal price = new BigDecimal(scanner.nextLine());
         productService.changeProductPrice(id, price);
+        System.out.println("Price was changed! Actual price is: " + price);
     }
 }

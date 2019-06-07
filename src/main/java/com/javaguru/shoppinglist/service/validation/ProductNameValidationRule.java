@@ -1,14 +1,15 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProductNameValidationRule implements ProductValidationRule {
 
-    ProductInMemoryRepository repository = new ProductInMemoryRepository();
+    private ProductInMemoryRepository repository;
+
+    public ProductNameValidationRule(ProductInMemoryRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void validate(Product product) {
@@ -24,7 +25,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
     @Override
     public void checkNotNull(Product product) {
         if (product.getName() == null) {
-            throw new ProductValidationException("Product name must not be null");
+            throw new ProductValidationException("Product name must not be null!");
         }
     }
 
