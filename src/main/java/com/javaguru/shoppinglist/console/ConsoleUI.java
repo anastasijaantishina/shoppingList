@@ -87,8 +87,8 @@ public class ConsoleUI {
         product.setPrice(price);
         product.setCategory(category);
         product.setDiscount(discount);
+
         Long id = productService.createProduct(product);
-        System.out.println("Result: " + id);
 
         product.printInformation();
         System.out.println();

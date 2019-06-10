@@ -1,5 +1,0 @@
-com\javaguru\shoppinglist\repository\ProductInMemoryRepositoryTest.class
-com\javaguru\shoppinglist\service\ProductServiceTest.class
-com\javaguru\shoppinglist\console\ConsoleUITest.class
-com\javaguru\shoppinglist\domain\ProductTest.class
-com\javaguru\shoppinglist\service\validation\ProductDiscountValidationRuleTest.class
