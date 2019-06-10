@@ -1,19 +1,11 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.Product;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-import com.javaguru.shoppinglist.service.ProductService;
-
+import com.javaguru.shoppinglist.domain.Product;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
 
 public class ProductDiscountValidationRuleTest {
 

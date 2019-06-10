@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.service;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 
@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static java.math.BigDecimal.ONE;
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

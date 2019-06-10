@@ -1,10 +1,10 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.domain.Product;
 
 import java.math.BigDecimal;
 
-public class ProductDiscountValidationRule implements ProductValidationRule{
+public class ProductDiscountValidationRule implements ProductValidationRule {
 
     private final BigDecimal MAX_DISCOUNT = new BigDecimal(80).setScale(0, BigDecimal.ROUND_DOWN);
     private final BigDecimal MIN_DISCOUNT = new BigDecimal(0).setScale(0, BigDecimal.ROUND_DOWN);
@@ -13,6 +13,7 @@ public class ProductDiscountValidationRule implements ProductValidationRule{
     public void validate(Product product) {
         checkNotNull(product);
         discountAmountValidation(product);
+        checkMinPriceForDiscount(product);
     }
 
     @Override
@@ -28,6 +29,11 @@ public class ProductDiscountValidationRule implements ProductValidationRule{
         }
         if (product.getDiscount().compareTo(MIN_DISCOUNT) < 0) {
             throw new ProductValidationException("Error! The discount can not be negative");
+        }
+    }
+    private void checkMinPriceForDiscount(Product product) {
+        if ((product.getPrice().compareTo(BigDecimal.valueOf(20)) < 0) && (product.getDiscount().compareTo(MIN_DISCOUNT) > 0)) {
+            throw new ProductValidationException("Error! Insufficient price for discount");
         }
     }
 }
