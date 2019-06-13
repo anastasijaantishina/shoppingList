@@ -8,8 +8,13 @@ import java.math.BigDecimal;
 
 public class ProductService {
 
-    ProductInMemoryRepository repository = new ProductInMemoryRepository();
-    ProductValidationService validationService = new ProductValidationService(repository);
+    private final ProductInMemoryRepository repository;
+    private final ProductValidationService validationService;
+
+    public ProductService(ProductInMemoryRepository repository, ProductValidationService validationService) {
+        this.repository = repository;
+        this.validationService = validationService;
+    }
 
     public Long createProduct(Product product) {
         validationService.validate(product);
