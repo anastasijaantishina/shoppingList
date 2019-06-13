@@ -42,11 +42,9 @@ public class ProductInMemoryRepository {
         }
     }
 
-    public boolean containsProductName(String name) {
-        if (products.containsValue(name)) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean existsByName(String name) {
+        return products.values().stream()
+                .anyMatch(product -> product.getName().equalsIgnoreCase(name));
     }
+
 }
