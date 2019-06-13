@@ -19,7 +19,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         spacesCountValidation(product.getName());
         correctUseOfSpacesValidation(product.getName());
         invalidCharactersValidation(product.getName());
-        uniqueNameValidation(product.getName());
+        uniqueNameValidation(product);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class ProductNameValidationRule implements ProductValidationRule {
         }
     }
 
-    private void uniqueNameValidation(String name) {
-        if (repository.containsProductName(name) == false) {
+    private void uniqueNameValidation(Product product) {
+        if (repository.existsByName(product.getName())) {
             throw new ProductValidationException("Error! Product name should be unique");
         }
     }
