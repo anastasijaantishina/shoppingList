@@ -1,11 +1,13 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class ProductInMemoryRepository {
 
     private Map<Long, Product> products = new HashMap<>();
