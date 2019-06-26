@@ -1,5 +1,6 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.config.AppConfig;
 import com.javaguru.shoppinglist.console.ConsoleUI;
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
@@ -10,6 +11,8 @@ import com.javaguru.shoppinglist.service.validation.ProductNullValidationRule;
 import com.javaguru.shoppinglist.service.validation.ProductPriceValidationRule;
 import com.javaguru.shoppinglist.service.validation.ProductValidationRule;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -21,19 +24,10 @@ import java.util.Scanner;
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        ProductInMemoryRepository repository = new ProductInMemoryRepository();
-
-        List<ProductValidationRule> validationRules = new LinkedList<>();
-        validationRules.add(new ProductNullValidationRule());
-        validationRules.add(new ProductNameValidationRule(repository));
-        validationRules.add(new ProductDiscountValidationRule());
-        validationRules.add(new ProductPriceValidationRule());
-
-        ProductValidationService validationService = new ProductValidationService(validationRules);
-
-        ProductService productService = new ProductService(repository, validationService);
-
-        ConsoleUI consoleUI = new ConsoleUI(productService);
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ConsoleUI consoleUI = context.getBean(ConsoleUI.class);
         consoleUI.execute();
+
+
     }
 }
