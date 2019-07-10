@@ -22,12 +22,23 @@ public class ProductService {
 
     public Long createProduct(Product product) {
         validationService.validate(product);
-        Product createdProduct = repository.put(product);
+        Product createdProduct = repository.save(product);
         return createdProduct.getId();
     }
 
     public void delete(Long id) {
-        repository.delete(id);
+        repository.deleteById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
+    }
+
+    public Product findById(Long id) {
+        return repository.findProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
+    }
+
+    public Product findByname(String name) {
+        return repository.findProductByName(name)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found by name" + name));
     }
 
     public void changeProductName(Long id, String name) {
