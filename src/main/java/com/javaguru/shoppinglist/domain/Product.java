@@ -10,6 +10,7 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
+    private String description;
     private ProductCategory category;
     private BigDecimal discount;
 
@@ -51,6 +52,14 @@ public class Product {
 
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public BigDecimal priceWithDiscount() {

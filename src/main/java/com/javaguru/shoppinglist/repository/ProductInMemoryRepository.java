@@ -1,31 +1,47 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-@Component
-public class ProductInMemoryRepository {
+@org.springframework.stereotype.Repository
+@Profile("inMemoryDatabase")
+public class ProductInMemoryRepository implements Repository {
 
     private Map<Long, Product> products = new HashMap<>();
     private Long productIdSequence = 0L;
 
-    public Product put(Product product) {
+    public Product save(Product product) {
         products.put(productIdSequence, product);
         product.setId(productIdSequence);
         productIdSequence++;
         return product;
     }
 
-    public void delete(Long id) {
-        if (!products.containsKey(id)) {
-            System.out.println("ID not found!");
-        } else {
-            products.remove(id);
-        }
+    @Override
+    public Optional<Product> findProductById(Long id) {
+        return Optional.ofNullable(products.get(id));
+    }
+
+    @Override
+    public Optional<Product> findProductByName(String name) {
+        return Optional.ofNullable(products.get(name));
+    }
+
+    @Override
+    public Optional<Product> deleteById(Long id) {
+        return Optional.ofNullable(products.remove(id));
+    }
+
+    @Override
+    public boolean existByName(String name) {
+        return products.values().stream()
+                .anyMatch(product -> product.getName().equalsIgnoreCase(name));
     }
 
     public void changeProductName(Long id, String name) {
@@ -43,10 +59,4 @@ public class ProductInMemoryRepository {
             products.get(id).setPrice(price);
         }
     }
-
-    public boolean existsByName(String name) {
-        return products.values().stream()
-                .anyMatch(product -> product.getName().equalsIgnoreCase(name));
-    }
-
 }
