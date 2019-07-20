@@ -12,7 +12,7 @@ public interface Repository {
 
     Optional<Product> findProductByName(String name);
 
-    Optional<Product> deleteById(Long id);
+    void deleteById(Long id);
 
     boolean existByName(String name);
 }

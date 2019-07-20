@@ -2,8 +2,6 @@ package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +32,8 @@ public class ProductInMemoryRepository implements Repository {
     }
 
     @Override
-    public Optional<Product> deleteById(Long id) {
-        return Optional.ofNullable(products.remove(id));
+    public void deleteById(Long id) {
+       products.remove(id);
     }
 
     @Override
