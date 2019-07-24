@@ -22,6 +22,7 @@ public class Product {
     @Column(name = "description")
     private String description;
     @Column(name = "category")
+    @Enumerated(value = EnumType.STRING)
     private ProductCategory category;
     @Column(name = "discount")
     private BigDecimal discount;

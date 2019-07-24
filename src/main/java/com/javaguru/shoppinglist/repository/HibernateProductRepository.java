@@ -55,7 +55,7 @@ public class HibernateProductRepository implements Repository {
     public boolean existByName(String name) {
         String query = "select case when count(*)> 0 " +
                 "then true else false end " +
-                "from Task t where t.name='" + name + "'";
+                "from Product p where p.name='" + name + "'";
         return (boolean) sessionFactory.getCurrentSession().createQuery(query)
                 .setMaxResults(1)
                 .uniqueResult();
