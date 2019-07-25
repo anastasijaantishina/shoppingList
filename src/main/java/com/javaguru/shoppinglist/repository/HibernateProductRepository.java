@@ -61,7 +61,15 @@ public class HibernateProductRepository implements Repository {
                 .uniqueResult();
     }
 
-    public List<Product> findAll() {
+    @Override
+    public Product changeProductDiscount(Long id, BigDecimal discount) {
+        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
+        product.setDiscount(discount);
+        sessionFactory.getCurrentSession().update(product);
+        return product;
+    }
+
+    public List<Product> findAll()  {
         return sessionFactory.getCurrentSession().createCriteria(Product.class).list();
     }
 
@@ -79,12 +87,6 @@ public class HibernateProductRepository implements Repository {
         return product;
     }
 
-    public Product changeProductDiscount(Long id, BigDecimal discount){
-        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
-        product.setDiscount(discount);
-        sessionFactory.getCurrentSession().update(product);
-        return product;
-    }
 
     public Product changeProductDescription(Long id, String description){
         Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);

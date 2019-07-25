@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static org.hibernate.hql.internal.antlr.HqlSqlTokenTypes.SELECT;
 
 @Service
 public class ProductService {
 
     private final Repository repository;
     private final ProductValidationService validationService;
+
 
     @Autowired
     public ProductService(Repository repository, ProductValidationService validationService) {
@@ -33,21 +37,23 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public Product findById(Long id) {
+    public Product findProductById(Long id) {
         return repository.findProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
     }
 
-    public Product findByname(String name) {
+    public Product findProductByName(String name) {
         return repository.findProductByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by name" + name));
     }
 
-    //public void changeProductName(Long id, String name) {
-      // repository.changeProductName(id, name);
-   // }
+    public List<Product> findAll(){
+        return repository.findAll();
+    }
 
-   // public void changeProductPrice(Long id, BigDecimal price) {
-       // repository.changeProductPrice(id, price);
-    //}
+    public void changeProductDiscount(Long id, BigDecimal discount) {
+       repository.changeProductDiscount(id, discount);
+    }
+
+
 }
