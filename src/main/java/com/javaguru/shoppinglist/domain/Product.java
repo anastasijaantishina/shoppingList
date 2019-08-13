@@ -4,7 +4,12 @@ import com.javaguru.shoppinglist.service.enums.ProductCategory;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import static java.math.BigDecimal.valueOf;
+
 
 @Entity
 @Table(name = "products")
@@ -26,6 +31,15 @@ public class Product {
     private ProductCategory category;
     @Column(name = "discount")
     private BigDecimal discount;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_cart",
+            joinColumns = { @JoinColumn(name = "product_id") },
+            inverseJoinColumns = { @JoinColumn(name = "cart_id") }
+    )
+
+    Set<ShoppingCart> carts = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -76,7 +90,7 @@ public class Product {
     }
 
     public BigDecimal priceWithDiscount() {
-        return price.subtract(getPrice().multiply(getDiscount()).divide(BigDecimal.valueOf(100)));
+        return price.subtract(getPrice().multiply(getDiscount()).divide(valueOf(100)));
     }
 
     public void printInformation() {
@@ -84,7 +98,7 @@ public class Product {
         System.out.println("Name of product - " + name);
         System.out.println("Product category - " + category);
         System.out.println("Regular price of product = " + price + " EUR");
-        if ((discount.compareTo(BigDecimal.valueOf(1)) > 0)) {
+        if ((discount.compareTo(valueOf(1)) > 0)) {
             System.out.println("Discount on product = " + discount + " %");
             System.out.println("Price with discount = " + priceWithDiscount() + " EUR");
         }

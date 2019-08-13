@@ -5,5 +5,6 @@ public enum ProductCategory {
     FRUITS,
     MEAT,
     DAIRY,
-    ALCOHOL;
+    ALCOHOL,
+    FISH
 }

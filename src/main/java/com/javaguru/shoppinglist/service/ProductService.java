@@ -3,6 +3,7 @@ package com.javaguru.shoppinglist.service;
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.dto.ProductDTO;
 import com.javaguru.shoppinglist.mapper.ProductConverter;
+import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.repository.Repository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +52,8 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    //public void changeProductName(Long id, String name) {
-    // repository.changeProductName(id, name);
-    // }
+    public void update(Product product){
+        repository.update(product);
+    }
 
-    // public void changeProductPrice(Long id, BigDecimal price) {
-    // repository.changeProductPrice(id, price);
-    //}
 }
