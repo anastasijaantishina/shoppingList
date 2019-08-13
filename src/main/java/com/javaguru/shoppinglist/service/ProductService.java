@@ -1,26 +1,28 @@
 package com.javaguru.shoppinglist.service;
 
 import com.javaguru.shoppinglist.domain.Product;
-import com.javaguru.shoppinglist.repository.HibernateProductRepository;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import com.javaguru.shoppinglist.dto.ProductDTO;
+import com.javaguru.shoppinglist.mapper.ProductConverter;
 import com.javaguru.shoppinglist.repository.Repository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
 
     private final Repository repository;
     private final ProductValidationService validationService;
+    private final ProductConverter converter;
 
     @Autowired
-    public ProductService(Repository repository, ProductValidationService validationService) {
+    public ProductService(Repository repository, ProductValidationService validationService, ProductConverter converter) {
         this.repository = repository;
         this.validationService = validationService;
+        this.converter = converter;
     }
 
     public Long createProduct(Product product) {
@@ -38,16 +40,22 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
     }
 
-    public Product findByname(String name) {
+    public Product findByName(String name) {
         return repository.findProductByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by name" + name));
     }
 
-    //public void changeProductName(Long id, String name) {
-      // repository.changeProductName(id, name);
-   // }
+    public List<ProductDTO> findAll() {
+        return repository.findAll().stream()
+                .map(product -> converter.convert(product))
+                .collect(Collectors.toList());
+    }
 
-   // public void changeProductPrice(Long id, BigDecimal price) {
-       // repository.changeProductPrice(id, price);
+    //public void changeProductName(Long id, String name) {
+    // repository.changeProductName(id, name);
+    // }
+
+    // public void changeProductPrice(Long id, BigDecimal price) {
+    // repository.changeProductPrice(id, price);
     //}
 }

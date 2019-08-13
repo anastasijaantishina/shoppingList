@@ -1,5 +1,4 @@
 package com.javaguru.shoppinglist.repository;
-
 import com.javaguru.shoppinglist.domain.Product;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -65,28 +64,28 @@ public class HibernateProductRepository implements Repository {
         return sessionFactory.getCurrentSession().createCriteria(Product.class).list();
     }
 
-    public Product changeProductName(Long id, String name){
+    public Product changeProductName(Long id, String name) {
         Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
         product.setName(name);
         sessionFactory.getCurrentSession().update(product);
         return product;
     }
 
-    public Product changeProductPrice(Long id, BigDecimal price){
+    public Product changeProductPrice(Long id, BigDecimal price) {
         Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
         product.setPrice(price);
         sessionFactory.getCurrentSession().update(product);
         return product;
     }
 
-    public Product changeProductDiscount(Long id, BigDecimal discount){
+    public Product changeProductDiscount(Long id, BigDecimal discount) {
         Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
         product.setDiscount(discount);
         sessionFactory.getCurrentSession().update(product);
         return product;
     }
 
-    public Product changeProductDescription(Long id, String description){
+    public Product changeProductDescription(Long id, String description) {
         Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
         product.setDescription(description);
         sessionFactory.getCurrentSession().update(product);
