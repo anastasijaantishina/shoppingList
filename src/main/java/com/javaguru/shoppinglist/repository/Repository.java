@@ -2,6 +2,8 @@ package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 public interface Repository {
@@ -15,4 +17,9 @@ public interface Repository {
     void deleteById(Long id);
 
     boolean existByName(String name);
+
+    List<Product> findAll();
+
+    Product changeProductDiscount(Long id, BigDecimal discount);
+
 }
