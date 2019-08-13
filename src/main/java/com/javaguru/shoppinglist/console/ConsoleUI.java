@@ -36,12 +36,12 @@ public class ConsoleUI {
                     case "2":
                         deleteProduct();
                         break;
-                    case "3":
-                        changeProductName();
-                        break;
-                    case "4":
-                        changeProductPrice();
-                        break;
+                   // case "3":
+                       // changeProductName();
+//                        break;
+//                    case "4":
+//                        changeProductPrice();
+//                        break;
                     case "5":
                         return;
                 }
@@ -109,23 +109,23 @@ public class ConsoleUI {
         productService.delete(id);
     }
 
-    private void changeProductName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id: ");
-        Long id = Long.valueOf(scanner.nextLine());
-        System.out.println("Enter product name: ");
-        String name = String.valueOf(scanner.nextLine());
-        productService.changeProductName(id, name);
-        System.out.println("Name was changed! Actual name is: " + name);
-    }
+   // private void changeProductName() {
+      //  Scanner scanner = new Scanner(System.in);
+        //System.out.println("Enter product id: ");
+        //Long id = Long.valueOf(scanner.nextLine());
+       // System.out.println("Enter product name: ");
+       // String name = String.valueOf(scanner.nextLine());
+       // productService.changeProductName(id, name);
+       // System.out.println("Name was changed! Actual name is: " + name);
+   // }
 
-    private void changeProductPrice() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id: ");
-        Long id = Long.valueOf(scanner.nextLine());
-        System.out.println("Enter product price: ");
-        BigDecimal price = new BigDecimal(scanner.nextLine());
-        productService.changeProductPrice(id, price);
-        System.out.println("Price was changed! Actual price is: " + price);
-    }
+//    private void changeProductPrice() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter product id: ");
+//        Long id = Long.valueOf(scanner.nextLine());
+//        System.out.println("Enter product price: ");
+//        BigDecimal price = new BigDecimal(scanner.nextLine());
+//        productService.changeProductPrice(id, price);
+//        System.out.println("Price was changed! Actual price is: " + price);
+//    }
 }

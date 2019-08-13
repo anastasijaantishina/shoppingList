@@ -2,16 +2,29 @@ package com.javaguru.shoppinglist.domain;
 
 import com.javaguru.shoppinglist.service.enums.ProductCategory;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true, name = "name")
     private String name;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "description")
     private String description;
+    @Column(name = "category")
+    @Enumerated(value = EnumType.STRING)
     private ProductCategory category;
+    @Column(name = "discount")
     private BigDecimal discount;
 
     public Long getId() {

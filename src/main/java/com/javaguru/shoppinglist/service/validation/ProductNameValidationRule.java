@@ -2,14 +2,15 @@ package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import com.javaguru.shoppinglist.repository.Repository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductNameValidationRule implements ProductValidationRule {
 
-    private ProductInMemoryRepository repository;
+    private Repository repository;
 
-    public ProductNameValidationRule(ProductInMemoryRepository repository) {
+    public ProductNameValidationRule(Repository repository) {
         this.repository = repository;
     }
 
@@ -96,7 +97,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
     }
 
     private void uniqueNameValidation(Product product) {
-        if (repository.existsByName(product.getName())) {
+        if (repository.existByName(product.getName())) {
             throw new ProductValidationException("Error! Product name should be unique");
         }
     }
