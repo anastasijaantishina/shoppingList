@@ -9,6 +9,7 @@ public class ProductConverter {
 
     public Product convert(ProductDTO dto) {
         Product product = new Product();
+        product.setId(dto.getId());
         product.setDiscount(dto.getDiscount());
         product.setCategory(dto.getCategory());
         product.setDescription(dto.getDescription());
@@ -19,6 +20,7 @@ public class ProductConverter {
 
     public ProductDTO convert(Product product) {
         ProductDTO dto = new ProductDTO();
+        dto.setId(product.getId());
         dto.setCategory(product.getCategory());
         dto.setDescription(product.getDescription());
         dto.setDiscount(product.getDiscount());

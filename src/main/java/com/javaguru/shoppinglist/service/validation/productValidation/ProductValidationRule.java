@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist.service.validation;
+package com.javaguru.shoppinglist.service.validation.productValidation;
 
 import com.javaguru.shoppinglist.domain.Product;
 

@@ -122,20 +122,16 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.7</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.1.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -152,7 +148,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8449</port>
+                    <port>8446</port>
                     <systemProperties>
                         <spring.profiles.active>hibernate</spring.profiles.active>
                     </systemProperties>

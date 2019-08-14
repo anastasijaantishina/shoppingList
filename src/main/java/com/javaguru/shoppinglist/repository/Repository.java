@@ -18,4 +18,6 @@ public interface Repository {
     boolean existByName(String name);
 
     List<Product> findAll();
+
+    void update(Product product);
 }

@@ -13,12 +13,12 @@ import java.util.Optional;
 @org.springframework.stereotype.Repository
 @Profile("hibernate")
 @Transactional
-public class HibernateProductRepository implements Repository {
+public class ProductRepository implements Repository {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public HibernateProductRepository(SessionFactory sessionFactory) {
+    public ProductRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -38,7 +38,8 @@ public class HibernateProductRepository implements Repository {
 
     @Override
     public Optional<Product> findProductByName(String name) {
-        Product product = (Product) sessionFactory.getCurrentSession().createCriteria(Product.class)
+        Product product = (Product) sessionFactory.getCurrentSession()
+                .createCriteria(Product.class)
                 .add(Restrictions.eq("name", name))
                 .uniqueResult();
         return Optional.ofNullable(product);
@@ -61,34 +62,12 @@ public class HibernateProductRepository implements Repository {
     }
 
     public List<Product> findAll() {
-        return sessionFactory.getCurrentSession().createCriteria(Product.class).list();
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Product.class).list();
     }
 
-    public Product changeProductName(Long id, String name) {
-        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
-        product.setName(name);
-        sessionFactory.getCurrentSession().update(product);
-        return product;
-    }
 
-    public Product changeProductPrice(Long id, BigDecimal price) {
-        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
-        product.setPrice(price);
-        sessionFactory.getCurrentSession().update(product);
-        return product;
-    }
-
-    public Product changeProductDiscount(Long id, BigDecimal discount) {
-        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
-        product.setDiscount(discount);
-        sessionFactory.getCurrentSession().update(product);
-        return product;
-    }
-
-    public Product changeProductDescription(Long id, String description) {
-        Product product = (Product) sessionFactory.getCurrentSession().load(Product.class, id);
-        product.setDescription(description);
-        sessionFactory.getCurrentSession().update(product);
-        return product;
+    public void update(Product product){
+        sessionFactory.getCurrentSession().saveOrUpdate(product);
     }
 }
