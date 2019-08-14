@@ -148,7 +148,7 @@
                 <version>2.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8446</port>
+                    <port>8444</port>
                     <systemProperties>
                         <spring.profiles.active>hibernate</spring.profiles.active>
                     </systemProperties>

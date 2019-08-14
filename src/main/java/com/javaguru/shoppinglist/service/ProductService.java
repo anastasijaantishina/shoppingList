@@ -25,8 +25,9 @@ public class ProductService {
         this.converter = converter;
     }
 
-    public Long createProduct(Product product) {
-        validationService.validate(product);
+    public Long createProduct(ProductDTO productdto) {
+        validationService.validate(productdto);
+        Product product = converter.convert(productdto);
         Product createdProduct = repository.save(product);
         return createdProduct.getId();
     }
@@ -35,13 +36,15 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public Product findById(Long id) {
+    public ProductDTO findById(Long id) {
         return repository.findProductById(id)
+                .map(product -> converter.convert(product))
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
     }
 
-    public Product findProductByName(String name) {
+    public ProductDTO findProductByName(String name) {
         return repository.findProductByName(name)
+                .map(product -> converter.convert(product))
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by name" + name));
     }
 

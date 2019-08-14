@@ -1,7 +1,6 @@
 package com.javaguru.shoppinglist.service.cartValidation;
 
-import com.javaguru.shoppinglist.domain.Product;
-import com.javaguru.shoppinglist.domain.ShoppingCart;
+import com.javaguru.shoppinglist.dto.CartDTO;
 import com.javaguru.shoppinglist.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Component;
 
@@ -15,14 +14,14 @@ public class CartNameValidationRule implements CartValidationRule {
     }
 
     @Override
-    public void validate(ShoppingCart cart) {
+    public void validate(CartDTO cart) {
         checkNotNull(cart);
         nameLengthValidation(cart.getName());
         uniqueNameValidation(cart);
     }
 
     @Override
-    public void checkNotNull(ShoppingCart cart) {
+    public void checkNotNull(CartDTO cart) {
 
         if (cart.getName() == null) {
             throw new CartValidationException("Cart name must not be null!");
@@ -38,9 +37,9 @@ public class CartNameValidationRule implements CartValidationRule {
         }
     }
 
-    private void uniqueNameValidation(ShoppingCart cart) {
+    private void uniqueNameValidation(CartDTO cart) {
         if (repository.existByName(cart.getName())) {
-            throw new CartValidationException("Error! Product name should be unique");
+            throw new CartValidationException("Error! Cart name should be unique");
         }
     }
 

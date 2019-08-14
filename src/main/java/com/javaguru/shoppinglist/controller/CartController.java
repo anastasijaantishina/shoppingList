@@ -22,11 +22,11 @@ public class CartController {
         this.service = service;
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<ShoppingCart> create(@RequestBody CartDTO dto) {
         ShoppingCart cart = new ShoppingCart();
         cart.setName(dto.getName());
-        service.createCart(cart);
+        service.createCart(dto);
         return ResponseEntity.ok(cart);
     }
 
@@ -48,7 +48,7 @@ public class CartController {
 
     @GetMapping(params = "name")
     public CartDTO findCartByName(@RequestParam("name") String name) {
-        ShoppingCart cart = service.findCartByName(name);
+        CartDTO cart = service.findCartByName(name);
         return new CartDTO(cart.getId(), cart.getName(), cart.getProductCount(), cart.getTotalAmount());
     }
 
