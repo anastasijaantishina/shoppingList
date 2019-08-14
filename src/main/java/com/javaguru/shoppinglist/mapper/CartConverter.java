@@ -9,6 +9,7 @@ public class CartConverter {
 
     public ShoppingCart convert(CartDTO dto) {
         ShoppingCart cart = new ShoppingCart();
+        cart.setId(dto.getId());
         cart.setName(dto.getName());
         cart.setProductCount(dto.getProductCount());
         cart.setTotalAmount(dto.getTotalAmount());
@@ -17,6 +18,7 @@ public class CartConverter {
 
     public CartDTO convert(ShoppingCart cart) {
         CartDTO dto = new CartDTO();
+        dto.setId(cart.getId());
         dto.setName(cart.getName());
         dto.setProductCount(cart.getProductCount());
         dto.setTotalAmount(cart.getTotalAmount());

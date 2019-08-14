@@ -3,9 +3,8 @@ package com.javaguru.shoppinglist.service;
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.dto.ProductDTO;
 import com.javaguru.shoppinglist.mapper.ProductConverter;
-import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.repository.Repository;
-import com.javaguru.shoppinglist.service.validation.ProductValidationService;
+import com.javaguru.shoppinglist.service.validation.productValidation.ProductValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by id" + id));
     }
 
-    public Product findByName(String name) {
+    public Product findProductByName(String name) {
         return repository.findProductByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found by name" + name));
     }
@@ -52,7 +51,8 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public void update(Product product){
+    public void update(ProductDTO dto){
+        Product product = converter.convert(dto);
         repository.update(product);
     }
 

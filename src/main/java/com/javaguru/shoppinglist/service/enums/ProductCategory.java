@@ -7,4 +7,6 @@ public enum ProductCategory {
     DAIRY,
     ALCOHOL,
     FISH
+
+
 }

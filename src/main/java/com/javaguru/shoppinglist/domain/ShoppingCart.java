@@ -21,15 +21,28 @@ public class ShoppingCart {
     @Column(unique = true, name = "name")
     private String name;
     @Column(name = "totalAmount")
-    private BigDecimal totalAmount;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
     @Column(name = "productCount")
     private int productCount;
 
     @ManyToMany(mappedBy = "carts")
+    @Column(name = "products")
     private Set<Product> products = new HashSet<>();
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public String getName() {

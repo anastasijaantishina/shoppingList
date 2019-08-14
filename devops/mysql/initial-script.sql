@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS shoppingCarts
 (
     id           BIGINT       NOT NULL AUTO_INCREMENT,
     name         VARCHAR(100) NOT NULL,
-    totalAmount  DECIMAL      NOT NULL,
+    totalAmount  DECIMAL ZEROFILL   NOT NULL ,
     productCount INT,
+    products     LIST,
 
     created      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)

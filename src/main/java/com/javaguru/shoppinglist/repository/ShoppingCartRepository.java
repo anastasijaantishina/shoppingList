@@ -20,6 +20,7 @@ public class ShoppingCartRepository {
 
     private final SessionFactory sessionFactory;
 
+
     @Autowired
     public ShoppingCartRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -31,13 +32,14 @@ public class ShoppingCartRepository {
     }
 
     public void update(ShoppingCart cart) {
-        sessionFactory.getCurrentSession().update(cart);
+        sessionFactory.getCurrentSession().saveOrUpdate(cart);
     }
 
-    public Optional<ShoppingCart> findByName(String name){
+    public Optional<ShoppingCart> findCartByName(String name){
         ShoppingCart cart = (ShoppingCart) sessionFactory.getCurrentSession()
                 .createCriteria(ShoppingCart.class)
-                .add(Restrictions.eq("name", name));
+                .add(Restrictions.eq("name", name))
+                .uniqueResult();
         return Optional.ofNullable(cart);
 
     }
@@ -51,4 +53,19 @@ public class ShoppingCartRepository {
         ShoppingCart cart = (ShoppingCart) sessionFactory.getCurrentSession().load(ShoppingCart.class, id);
         sessionFactory.getCurrentSession().delete(cart);
     }
+
+    public boolean existByName(String name) {
+        String query = "select case when count(*)> 0 " +
+                "then true else false end " +
+                "from ShoppingCart s where s.name='" + name + "'";
+        return (boolean) sessionFactory.getCurrentSession().createQuery(query)
+                .setMaxResults(1)
+                .uniqueResult();
+    }
+
+    public void saveProductToList(Product product, ShoppingCart cart){
+        cart.getProducts().add(product);
+        sessionFactory.getCurrentSession().saveOrUpdate(cart);
+    }
+
 }

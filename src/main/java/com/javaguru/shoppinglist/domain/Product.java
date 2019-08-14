@@ -41,6 +41,14 @@ public class Product {
 
     Set<ShoppingCart> carts = new HashSet<>();
 
+    public Set<ShoppingCart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<ShoppingCart> carts) {
+        this.carts = carts;
+    }
+
     public Long getId() {
         return id;
     }

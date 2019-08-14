@@ -1,9 +1,12 @@
 package com.javaguru.shoppinglist.controller;
 
 import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.domain.ShoppingCart;
+import com.javaguru.shoppinglist.dto.CartDTO;
 import com.javaguru.shoppinglist.dto.ProductDTO;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +44,7 @@ public class ProductController {
 
     @GetMapping(params = "name")
     public ProductDTO findProductByName(@RequestParam("name") String name) {
-        Product product = service.findByName(name);
+        Product product = service.findProductByName(name);
         return new ProductDTO(product.getId(), product.getName(),
                 product.getPrice(), product.getDescription(),
                 product.getCategory(), product.getDiscount());
@@ -55,6 +58,11 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         service.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable("id") Long id, @RequestBody ProductDTO dto){
+        service.update(dto);
     }
 
 }

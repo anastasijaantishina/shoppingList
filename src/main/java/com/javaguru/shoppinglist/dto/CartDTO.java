@@ -1,10 +1,14 @@
 package com.javaguru.shoppinglist.dto;
 
+import org.hibernate.sql.Update;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CartDTO {
-
+    
     private Long id;
     private String name;
     private int productCount;
@@ -22,6 +26,10 @@ public class CartDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

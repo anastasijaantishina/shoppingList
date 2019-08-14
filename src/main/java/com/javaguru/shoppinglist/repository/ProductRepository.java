@@ -38,7 +38,8 @@ public class ProductRepository implements Repository {
 
     @Override
     public Optional<Product> findProductByName(String name) {
-        Product product = (Product) sessionFactory.getCurrentSession().createCriteria(Product.class)
+        Product product = (Product) sessionFactory.getCurrentSession()
+                .createCriteria(Product.class)
                 .add(Restrictions.eq("name", name))
                 .uniqueResult();
         return Optional.ofNullable(product);
@@ -67,6 +68,6 @@ public class ProductRepository implements Repository {
 
 
     public void update(Product product){
-        sessionFactory.getCurrentSession().update(product);
+        sessionFactory.getCurrentSession().saveOrUpdate(product);
     }
 }
