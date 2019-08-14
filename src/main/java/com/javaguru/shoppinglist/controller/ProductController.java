@@ -6,7 +6,6 @@ import com.javaguru.shoppinglist.dto.CartDTO;
 import com.javaguru.shoppinglist.dto.ProductDTO;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class ProductController {
         this.service = service;
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<Product> create(@RequestBody ProductDTO dto) {
         Product product = new Product();
         product.setName(dto.getName());
@@ -29,13 +28,13 @@ public class ProductController {
         product.setDescription(dto.getDescription());
         product.setCategory(dto.getCategory());
         product.setDiscount(dto.getDiscount());
-        service.createProduct(product);
+        service.createProduct(dto);
         return ResponseEntity.ok(product);
     }
 
     @GetMapping("/{id}")
     public ProductDTO findProductById(@PathVariable("id") Long id) {
-        Product product = service.findById(id);
+        ProductDTO product = service.findById(id);
         return new ProductDTO(product.getId(), product.getName(),
                 product.getPrice(), product.getDescription(),
                 product.getCategory(), product.getDiscount());
@@ -44,7 +43,7 @@ public class ProductController {
 
     @GetMapping(params = "name")
     public ProductDTO findProductByName(@RequestParam("name") String name) {
-        Product product = service.findProductByName(name);
+        ProductDTO product = service.findProductByName(name);
         return new ProductDTO(product.getId(), product.getName(),
                 product.getPrice(), product.getDescription(),
                 product.getCategory(), product.getDiscount());

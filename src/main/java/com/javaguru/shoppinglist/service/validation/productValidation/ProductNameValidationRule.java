@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist.service.validation.productValidation;
 
 import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDTO;
 import com.javaguru.shoppinglist.repository.Repository;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
     }
 
     @Override
-    public void validate(Product product) {
+    public void validate(ProductDTO product) {
         checkNotNull(product);
         nameLengthValidation(product.getName());
         startsAndEndsWithValidation(product.getName());
@@ -25,7 +26,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
     }
 
     @Override
-    public void checkNotNull(Product product) {
+    public void checkNotNull(ProductDTO product) {
         if (product.getName() == null) {
             throw new ProductValidationException("Product name must not be null!");
         }
@@ -95,7 +96,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         }
     }
 
-    private void uniqueNameValidation(Product product) {
+    private void uniqueNameValidation(ProductDTO product) {
         if (repository.existByName(product.getName())) {
             throw new ProductValidationException("Error! Product name should be unique");
         }

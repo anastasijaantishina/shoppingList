@@ -37,8 +37,9 @@ public class ShoppingCartService {
         return cartdto;
     }
 
-    public Long createCart(ShoppingCart cart) {
-        service.validate(cart);
+    public Long createCart(CartDTO cartdto) {
+        service.validate(cartdto);
+        ShoppingCart cart = converter.convert(cartdto);
         ShoppingCart createdCart = repository.save(cart);
         return createdCart.getId();
     }
@@ -48,8 +49,9 @@ public class ShoppingCartService {
         repository.update(cart);
     }
 
-    public ShoppingCart findCartByName(String name) {
+    public CartDTO findCartByName(String name) {
         return repository.findCartByName(name)
+                .map(shoppingCart -> converter.convert(shoppingCart))
                 .orElseThrow(() -> new IllegalArgumentException("Cart not found by name" + name));
     }
 
